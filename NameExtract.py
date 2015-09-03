@@ -3,13 +3,13 @@ import gzip
 import re
 import argparse
 
+
 class NamaeWa(object):
     dict_array = None
     longest_word = 10
 
-    def __init__(self):
-        with gzip.open('names.pklzip', 'rb') as o_file:
-            self.dict_array = cPickle.load(o_file)
+    def build_map(self, sourcefile):
+        self.dict_array = cPickle.load(sourcefile)
 
     def extract_name(self, source_string):
         base_string = source_string.split('@')[0]
@@ -90,5 +90,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('email')
     args = parser.parse_args()
-    extractor = NamaeWa()
+    with gzip.open('static/names.pklzip', 'rb') as o_file:
+        extractor = NamaeWa(o_file)
+
     print "First name (best guess): " + extractor.extract_name(args.email)

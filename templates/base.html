@@ -1,0 +1,45 @@
+{% extends 'bootstrap/base.html' %}
+{% block head %}
+    {{ super() }}
+
+{% endblock %}
+{% block content %}
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand navbar-brand-centered">Namae Wa?</div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-brand-centered">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Stuff</a></li>
+                    <li><a href="#">More stuff</a></li>
+                </ul>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        {% block page_content %}{% endblock %}
+    </div>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+
+{% endblock %}
+
+{% block styles -%}
+    {{ super() }}
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+{% endblock styles %}
+

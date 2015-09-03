@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title %}Namae wa?{% endblock %}
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-info">
+                        {% if best_guess %}
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Best guess: {{ best_guess }}</h3>
+                            </div>
+                        {% endif %}
+                    	  <div class="panel-body">
+                              {{ wtf.quick_form(form) }}
+                    	  </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
