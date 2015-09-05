@@ -14,7 +14,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))  # refers to application_t
 APP_STATIC = os.path.join(APP_ROOT, 'static')
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = ':14+loss+LOSS+shoe+NOON+38:'
+app.config['SECRET_KEY'] = ''
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 
