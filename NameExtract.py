@@ -87,6 +87,7 @@ if __name__ == '__main__':
     parser.add_argument('email')
     args = parser.parse_args()
     with gzip.open('static/names.pklzip', 'rb') as o_file:
-        extractor = NamaeWa(o_file)
+        extractor = NamaeWa()
+        extractor.build_map(o_file)
 
     print "First name (best guess): " + extractor.extract_name(args.email)
