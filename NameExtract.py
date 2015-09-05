@@ -2,7 +2,7 @@ import cPickle
 import gzip
 import re
 import argparse
-
+from operator import itemgetter
 
 class NamaeWa(object):
     dict_array = None
@@ -26,7 +26,7 @@ class NamaeWa(object):
         elif ('-' in base_string):
             guessed_names = self.axe_twoletter_names(base_string.split('-'))
         else:
-            guessed_names = self.axe_twoletter_names(self.break_string(base_string))
+            guessed_names = [self.break_string(base_string)]
 
         if len(guessed_names) <= 0:
             guessed_names = [base_string]
@@ -46,16 +46,16 @@ class NamaeWa(object):
             max_length = str_length
 
         for n in range(str_length):
-            words[wc] = (source_string[n: n+1])
+            words[wc] = ((source_string[n: n+1]), 0)
             m = 1
             test = words.get(wc, '')
 
             found = False
             while m <= max_length and (n + m) < str_length:
-                test += source_string[n+m:n+m+1]
+                test = (test[0] + source_string[n+m:n+m+1], test[1])
 
-                if test in self.dict_array:
-                    words[wc] = test
+                if test[0].lower() in self.dict_array:
+                    words[wc] = (test[0], int(self.dict_array[test[0].lower()]))
                     k = m
                     found = True
 
@@ -67,22 +67,18 @@ class NamaeWa(object):
                 n += 1
             wc += 1
 
-        new_word = {}
-        n = 0
-        single = False
-        for word in words:
-            if len(words[word]) > 1:
-                if single:
-                    n += 1
-                    single = False
-                new_word[n] = words[word]
-                n += 1
 
         components = []
-        for key, value in new_word.iteritems():
-            components.append(value)
+        for key, value in words.iteritems():
+            if value[1] > 0 and len(value[0]) > 2:
+                components.append(value)
 
-        return components
+        # components = sorted(components, key=itemgetter(1), reverse=True)
+
+        if len(components) <= 0:
+            return source_string
+
+        return components[0][0]
 
 
 
