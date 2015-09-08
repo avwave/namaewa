@@ -1,4 +1,5 @@
 - Make sure you have virtualenv installed. (i.e. "sudo pip install virtualenv")
+- Create you virtualenv "virtualenv venv"
 - Activate your virtualenv by running "source venv/bin/activate"
 - Install requirements by running "pip install -r requirements.txt"
 
